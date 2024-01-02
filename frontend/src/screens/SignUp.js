@@ -1,12 +1,13 @@
 import React,{useState} from "react";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Navbar from "../components/Navbar";
 
 export default function SignUp() {
     const [credentials , setcredentials] = useState({name:"",email:"",password:"",geolocation:""})
 
     const handleSubmit = async(e)=>{
       try {
-        console.log("df")
+        // console.log("df")
         e.preventDefault();
         const response = await fetch("http://localhost:5000/api/users",{
             method: 'POST',
@@ -27,10 +28,13 @@ const onChange=(event)=>{
     setcredentials({...credentials,[event.target.name]:event.target.value})
 }
   return (
-    <>
+    <div style={{ backgroundImage: 'url("https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")', backgroundSize: 'cover',height: '100vh' }}>
+      <div>
+      <Navbar />
+      </div>
     <div className="container">
-      <form onSubmit={handleSubmit}>
-      <div className="mb-3">
+      <form className='w-50 m-auto mt-5 border bg-dark border-success rounded' onSubmit={handleSubmit}>
+      <div className="m-3">
           <label htmlFor="name" className="form-label">
             Name
           </label>
@@ -38,7 +42,7 @@ const onChange=(event)=>{
             type="text"
             className="form-control" name='name' value={credentials.name} onChange={onChange} />
         </div>
-        <div className="mb-3">
+        <div className="m-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
           </label>
@@ -53,7 +57,7 @@ const onChange=(event)=>{
             We'll never share your email with anyone else.
           </div>
         </div>
-        <div className="mb-3">
+        <div className="m-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
@@ -64,7 +68,7 @@ const onChange=(event)=>{
             id="exampleInputPassword1"
           />
         </div>
-        <div className="mb-3">
+        <div className="m-3">
           <label htmlFor="exampleInputAddress" className="form-label">
             Address
           </label>
@@ -78,9 +82,9 @@ const onChange=(event)=>{
         <button type="submit" className="m-3 btn btn-success">
           Submit
         </button>
-        <Link to="/login" className='m-3 btn btn-danger'>Already a user</Link>
+        <Link to="/login" className='m-3 mx-1 btn btn-danger'>Already a user</Link>
       </form>
       </div>
-    </>
+    </div>
   );
 }
